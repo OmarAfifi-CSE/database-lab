@@ -34,7 +34,7 @@ async function runQueries() {
   const [topPerson] = await pool.query(`
     SELECT p.fName, p.lName, COUNT(pr.idproject) AS projectCount
     FROM person p
-    LEFT JOIN project pr ON pr.person_idperson = p.idperson
+    INNER JOIN project pr ON pr.person_idperson = p.idperson
     GROUP BY p.idperson
     HAVING projectCount > 1
     ORDER BY projectCount DESC
@@ -62,14 +62,14 @@ async function runQueries() {
   );
 
   // —— QUERY 4: DELETE — remove persons with no city set
-  console.log('\n── QUERY 4: Delete persons with no city ──');
+  // console.log('\n── QUERY 4: Delete persons with no city ──');
 
-  const [deleteResult] = await pool.query(`
-    DELETE FROM person
-    WHERE city IS NULL OR city = ''
-  `);
+  // const [deleteResult] = await pool.query(`
+  //   DELETE FROM person
+  //   WHERE city IS NULL OR city = ''
+  // `);
 
-  console.log(`  Deleted ${deleteResult.affectedRows} person(s) with no city.`);
+  // console.log(`  Deleted ${deleteResult.affectedRows} person(s) with no city.`);
 
 // —— QUERY 5: UPDATE — update email for person with id = 1
 console.log('\n── QUERY 5: Update email for person with id = 1 ──');
@@ -81,15 +81,15 @@ console.log(`  Updated ${updateResult.affectedRows} person(s) email(s).`);
 
 
 // ======================================== TASK =============================================================
-//  —— QUERY 6: Show persons who are enrolled in more than 2 courses, display their full name and course count
+// 1- Show persons who are enrolled in more than 2 courses, display their full name and course count
 
-//  —— QUERY 7:List each distinct country and the number of persons in it, only show countries with more than 2 persons 
+// 2- list each distinct country and the number of persons in it, only show countries with more than 2 persons
+ 
+// 3- Update the email of all persons who have at least one project, set it to their firstName + lastName + '@company.com
 
-//  —— QUERY 8: Update the email of all persons who have at least one project, set it to their firstName + lastName + '@company.com'
+// 4- Delete all courses that belong to persons from a specific country
 
-//  —— QUERY 9: Delete all courses that belong to persons from a specific country
-
-//  —— QUERY 10: Find all persons who are from a specific set of countries
+// 5- Show each country and the average number of languages spoken by persons from that country, only show countries where the average is more than 1
 
 
   await pool.end();
