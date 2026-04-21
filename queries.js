@@ -124,7 +124,7 @@ async function runQueries() {
   console.log(`  Updated ${task3.affectedRows} emails.`);
 
   // 4- Delete all courses that belong to persons from a specific country (e.g., 'Egypt')
-  console.log('\n── TASK 4: Deleting courses for a specific country ──');
+  console.log('\n── TASK 4: Deleting courses for a specific country (Egypt) ──');
   const targetCountry = 'Egypt'; // Change this to the desired country
   const [task4] = await pool.query(`
     DELETE FROM course 

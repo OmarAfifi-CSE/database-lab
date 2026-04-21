@@ -6,11 +6,11 @@ async function seedDatabase() {
 
     const users = [
         { fName: 'Ali', lName: 'Hassan', country: 'Egypt', email: 'ali1@mail.com', courses: ['C1', 'C2', 'C3'], projects: ['P1'], langs: ['Arabic', 'English'] },
-        { fName: 'Ahmed', lName: 'Amr', country: 'Egypt', email: 'ahmed@mail.com', courses: ['C1'], projects: ['P1'], langs: ['Arabic'] },
+        { fName: 'Ahmed', lName: 'Amr', country: 'Egypt', email: 'ahmed@mail.com', courses: ['C1', 'C2', 'C3'], projects: ['P1'], langs: ['Arabic'] },
         { fName: 'Mona', lName: 'Zaki', country: 'Egypt', email: 'mona@mail.com', courses: [], projects: [], langs: ['Arabic'] },
         { fName: 'John', lName: 'Doe', country: 'USA', email: 'john@mail.com', courses: ['C1', 'C2', 'C3'], projects: ['P1'], langs: ['English', 'Spanish'] },
         { fName: 'Sarah', lName: 'Smith', country: 'USA', email: 'sarah@mail.com', courses: ['C1'], projects: ['P1'], langs: ['English', 'French'] },
-        { fName: 'Mike', lName: 'Ross', country: 'USA', email: 'mike@mail.com', courses: ['C1'], projects: ['P1'], langs: ['English'] },
+        { fName: 'Mike', lName: 'Ross', country: 'USA', email: 'mike@mail.com', courses: ['C1', 'C2', 'C3'], projects: ['P1'], langs: ['English'] },
         { fName: 'Omar', lName: 'Khalil', country: 'Palestine', email: 'omar@mail.com', courses: ['C1', 'C2'], projects: ['P1'], langs: ['Arabic'] },
         { fName: 'Layla', lName: 'Noor', country: 'Palestine', email: 'layla@mail.com', courses: ['C1'], projects: ['P1'], langs: ['Arabic'] },
         { fName: 'Rami', lName: 'Adel', country: 'Palestine', email: 'rami@mail.com', courses: [], projects: ['P1'], langs: ['Arabic'] },
@@ -42,7 +42,7 @@ async function seedDatabase() {
             for (const l of u.langs) {
                 await pool.query('INSERT INTO language (name, person_idperson) VALUES (?, ?)', [l, personId]);
             }
-            
+
             console.log(`Added: ${u.fName}`);
         } catch (err) {
             console.log(`Skipped ${u.fName}: ${err.message}`);
